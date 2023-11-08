@@ -1,6 +1,6 @@
 const { string } = require("i/lib/util");
 
-// Definire un array di oggetti, ogni oggetto rappresenta un film o serie tv, che è caratterizzato da: title, year, genre, rating, type (movie o tv), seasons (solo per serie tv).
+// 1.Definire un array di oggetti, ogni oggetto rappresenta un film o serie tv, che è caratterizzato da: title, year, genre, rating, type (movie o tv), seasons (solo per serie tv).
 let filmsAndSeries = [
     {
         title: 'Breaking Bad',
@@ -50,7 +50,7 @@ let filmsAndSeries = [
     }
 ];
 
-// Creare una classe Movie che contenga le informazioni sopra indicate.
+// 2.Creare una classe Movie che contenga le informazioni sopra indicate.
 class Movie{
     title; 
     year; 
@@ -78,7 +78,7 @@ class Movie{
     }
 
 // METODI --------------------------------------------------------
-// Entrambe le classi dovranno avere un metodo toString() che ritorni una stringa con i dati del film, tipo: 
+// 4..Entrambe le classi dovranno avere un metodo toString() che ritorni una stringa con i dati del film, tipo: 
 
     toString() {
         return `${this.title} is a ${this.genre} ${this.type}. It was released in ${this.year} and has a rating of ${this.rating}`;
@@ -90,7 +90,7 @@ class Movie{
 let movie1 = new Movie("Talk to me", 2023,'Horror',6,'movie');
 
 
-// Creare una classe TvSeries che estenda la classe Movie e ne aggiunta la proprietà seasons.
+// 3.Creare una classe TvSeries che estenda la classe Movie e ne aggiunta la proprietà seasons.
 class Tv extends Movie{
     seasons;
 
@@ -105,7 +105,7 @@ class Tv extends Movie{
     }
 
     // METODI --------------------------------------------------------
-    // Entrambe le classi dovranno avere un metodo toString() che ritorni una stringa con i dati del film, tipo: 
+    // 4.Entrambe le classi dovranno avere un metodo toString() che ritorni una stringa con i dati del film, tipo: 
 
     toString() {
         return `
@@ -116,7 +116,7 @@ class Tv extends Movie{
 
 let series1 = new Tv("Guardian: The Lonely and Great God", 2016,'Drama',9.4,'Tv Series', 1);
 
-// Tramite la funzione .map(), creare un nuovo array dove per ogni elemento dell’array di oggetti viene creata un istanza della classe Movie o TvSerie in base al type e salvata nel nuovo array.
+// 5.Tramite la funzione .map(), creare un nuovo array dove per ogni elemento dell’array di oggetti viene creata un istanza della classe Movie o TvSerie in base al type e salvata nel nuovo array.
 
 let filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries) => {
     if (singleFilmAndSeries.type === 'Movie') {
@@ -131,7 +131,7 @@ let filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries) => {
     }
 });
 
-// Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
+// 6.Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
     // Inizializzo un array vuoto per memorizzare i generi univoci
     let genreList = [];
 
@@ -148,11 +148,8 @@ let filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries) => {
     });
 
 
-// Creiamo una funzione che restituisca la media dei voti di tutti i film per un determinato genere. Prevedere un argomento per la lista dei film ed uno per il genere.
+// 7.Creiamo una funzione che restituisca la media dei voti di tutti i film per un determinato genere. Prevedere un argomento per la lista dei film ed uno per il genere.
 
-// setto punteggio e film a 0 
-
-// Riutilizzo della lista dei generi univoci
 function averageRatingByGenre(filmsList, genresList) {
     // setto le var a 0
     let totRating = 0;
@@ -183,13 +180,20 @@ function averageRatingByGenre(filmsList, genresList) {
     }
     }
 
-// Utilizzo della lista dei generi univoci per il calcolo della media dei voti
-let chosenGenre = genreList[1]; 
-let mediaVoti = averageRatingByGenre(filmsAndSeries, chosenGenre);
+    // Utilizzo della lista dei generi univoci per il calcolo della media dei voti
+    let chosenGenre = genreList[1]; 
+    let mediaVoti = averageRatingByGenre(filmsAndSeries, chosenGenre);
+
+
+
+// 8.Creiamo una funzione che filtri i film in base ad un genere passato come argomento e ne ritorni un array con all’interno il risultato della funzione toString() di ogni film.
 
 
 
 
+
+
+// ****************************************** CONSOLE.LOG ******************************************
 console.log(movie1);
 
 console.log(`
