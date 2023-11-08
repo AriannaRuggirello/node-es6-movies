@@ -117,17 +117,22 @@ class Tv extends Movie{
 let series1 = new Tv("Guardian: The Lonely and Great God", 2016,'Drama',9.4,'Tv Series', 1);
 
 // Tramite la funzione .map(), creare un nuovo array dove per ogni elemento dell’array di oggetti viene creata un istanza della classe Movie o TvSerie in base al type e salvata nel nuovo array.
-const filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries)=>{
-    return singleFilmAndSeries.type;
+
+let filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries) => {
+    if (singleFilmAndSeries.type === 'Movie') {
+        // Se il type è 'Movie', creo un'istanza della classe Movie
+        return new Movie(singleFilmAndSeries.title, singleFilmAndSeries.year, singleFilmAndSeries.genre, singleFilmAndSeries.rating);
+    } else if (singleFilmAndSeries.type === 'Tv Series') {
+        // Se il type è 'Tv Series', creo un'istanza della classe TvSeries
+        return new Tv(singleFilmAndSeries.title, singleFilmAndSeries.year, singleFilmAndSeries.genre, singleFilmAndSeries.rating, singleFilmAndSeries.seasons);
+    } else {
+        // Se il type non è riconosciuto, lancia un errore
+        throw new Error('Type non riconosciuto');
+    }
 });
 
-// Creiamo una funzione che restituisca la media dei voti di tutti i film per un determinato genere. Prevedere un argomento per la lista dei film ed uno per il genere.
-
-
-
-
 // Creiamo una funzione che restituisca la lista di tutti i generi dei film, senza che questi si ripetano.
-    // Inizializza un array vuoto per memorizzare i generi univoci
+    // Inizializzo un array vuoto per memorizzare i generi univoci
     let genreList = [];
 
     // ciclo ogni oggetto nell'array
@@ -143,18 +148,82 @@ const filmsAndSeriesTypes = filmsAndSeries.map((singleFilmAndSeries)=>{
     });
 
 
+// Creiamo una funzione che restituisca la media dei voti di tutti i film per un determinato genere. Prevedere un argomento per la lista dei film ed uno per il genere.
+
+// setto punteggio e film a 0 
+
+// Riutilizzo della lista dei generi univoci
+function averageRatingByGenre(filmsList, genresList) {
+    // setto le var a 0
+    let totRating = 0;
+    let nFilm = 0;
+    // cilo l'array
+    filmsAndSeries.forEach((film) => {
+        // se la tipologia è movie
+        if (film.type === 'Movie') {
+            // ciclo la lista dei generi
+            genreList.forEach((genre) => {
+                 // Controllo se il genere specificato è presente nel film corrente
+                if (film.genre.includes(genre)) {
+                    // Aggiungo il punteggio del film al punteggio totale e incremento il numero di film
+                    totRating += film.rating;
+                    nFilm++;
+                }
+            });
+        }
+    });
+
+   // Controllo se è stato trovato almeno un film per il genere specificato
+    if (nFilm === 0) {
+        return "Nessun film trovato per il genere specificato.";
+    } 
+    else {
+        // Calcolo e restituisco la media dei voti
+        return totRating / nFilm;
+    }
+    }
+
+// Utilizzo della lista dei generi univoci per il calcolo della media dei voti
+let chosenGenre = genreList[1]; 
+let mediaVoti = averageRatingByGenre(filmsAndSeries, chosenGenre);
 
 
 
 
 console.log(movie1);
 
-console.log(movie1.toString());
+console.log(`
+******** 
+${movie1.toString()} 
+********
+`);
 
 console.log(series1);
 
-console.log(series1.toString());
+console.log(`
+******** 
+${series1.toString()} 
+********`);
 
-console.log(filmsAndSeriesTypes);
+console.log(`
+******** 
+${filmsAndSeriesTypes} 
+********`);
 
-console.log(genreList);
+console.log(`
+******** 
+La lista dei generi: ${genreList} 
+******** `);
+
+console.log(`
+******** 
+La media dei voti per il genere ${chosenGenre} è ${mediaVoti} 
+******** `);
+
+
+
+
+
+
+
+
